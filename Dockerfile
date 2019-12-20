@@ -6,14 +6,14 @@ RUN docker-php-ext-install pdo pdo_mysql
 WORKDIR /var/www
 RUN rm -rf /var/www/html
 
-RUN curl -sS https://getcomposer.org/installer | php --install-dir=bin
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # RUN composer install && \
 #     cp .env.example .env && \
 #     php artisan config:cache
 
 # COPY . /var/www\\
-RUN ls -s public html
+RUN ln -s public html
 
 EXPOSE 9000
 ENTRYPOINT ["php-fpm"]
